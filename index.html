@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" manifest="offline.appcache">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -55,10 +55,50 @@
         <p class="lede">كل ما تحتاجه من أجهزة الألعاب والإلكترونيات وملحقاتها في مكان واحد.</p>
         <a class="phone" href="tel:0944227117" aria-label="اتصل بمتجر GameYard على الرقم 0944227117">0944227117</a>
         <div><a class="run" href="https://w90008.github.io/-/slopkit/poops.html?go=1&amp;auto=1&amp;trigger=netcontrol&amp;payload=1&amp;v=17"><span>▶</span>RUN</a></div>
-        <div class="status"><i></i>READY TO LAUNCH</div>
+        <div class="status" id="cache-status"><i></i><span>PREPARING OFFLINE CACHE...</span></div>
       </section>
     </main>
     <footer>GameYard • Electronic Devices &amp; Video Games</footer>
   </div>
+  <script>
+    (function(){
+      var status=document.getElementById('cache-status');
+      var label=status?status.getElementsByTagName('span')[0]:null;
+      function setStatus(text){if(label){label.textContent=text;}}
+      function ready(){setStatus(navigator.onLine===false?'OFFLINE MODE':'OFFLINE READY');}
+      function updateNetworkStatus(){
+        if(navigator.onLine===false){setStatus('OFFLINE MODE');}
+        else if(document.documentElement.getAttribute('data-offline-ready')==='yes'){setStatus('OFFLINE READY');}
+      }
+      window.addEventListener('online',updateNetworkStatus);
+      window.addEventListener('offline',updateNetworkStatus);
+      if('serviceWorker' in navigator){
+        window.addEventListener('load',function(){
+          navigator.serviceWorker.register('./sw.js',{scope:'./'}).then(function(){
+            return navigator.serviceWorker.ready;
+          }).then(function(){
+            document.documentElement.setAttribute('data-offline-ready','yes');
+            ready();
+          }).catch(function(){setStatus('BROWSER CACHE ACTIVE');});
+        });
+      }else if(window.applicationCache){
+        window.applicationCache.addEventListener('cached',function(){
+          document.documentElement.setAttribute('data-offline-ready','yes');
+          ready();
+        });
+        window.applicationCache.addEventListener('updateready',function(){
+          document.documentElement.setAttribute('data-offline-ready','yes');
+          ready();
+        });
+        window.applicationCache.addEventListener('noupdate',function(){
+          document.documentElement.setAttribute('data-offline-ready','yes');
+          ready();
+        });
+        window.applicationCache.addEventListener('error',function(){setStatus('BROWSER CACHE ACTIVE');});
+      }else{
+        setStatus('BROWSER CACHE ACTIVE');
+      }
+    }());
+  </script>
 </body>
 </html>
