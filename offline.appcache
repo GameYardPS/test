@@ -1,0 +1,13 @@
+CACHE MANIFEST
+# GameYard offline v1
+
+CACHE:
+./
+./index.html
+./sw.js
+
+NETWORK:
+*
+
+FALLBACK:
+./ ./index.html
