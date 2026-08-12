@@ -1,4 +1,4 @@
-var CACHE_NAME = 'gameyard-complete-offline-v6';
+var CACHE_NAME = 'gameyard-clean-offline-v7';
 var APP_FILES = [
   "./",
   "./index.html",
@@ -19,23 +19,14 @@ var APP_FILES = [
   "./offsets/9.20.js",
   "./offsets/9.40.js",
   "./offsets/9.60.js",
-  "./payloads/5%3DLapy-JB-Daemon_v1.2.elf",
-  "./payloads/Lapy-JB-Daemon.elf",
-  "./payloads/Lapy-JB-Daemon_v1.2.elf.elf",
-  "./payloads/PIZZA-HEN-v0.1.elf",
   "./payloads/PLK.elf",
-  "./payloads/ShadowMountPlus%201.7alpha5.elf",
-  "./payloads/ShadowMountPlus_1.7alpha5.elf",
   "./payloads/elfldr-ps5-1360.elf",
   "./payloads/ftpsrv-ps5.elf",
   "./payloads/gdbsrv-ps5.elf",
   "./payloads/kexp_2026_05_25.bin",
   "./payloads/klogsrv-ps5.elf",
   "./payloads/kstuff.elf",
-  "./payloads/np-fake-signin-ps5.elf",
-  "./payloads/ps5-backpork.elf",
   "./payloads/shsrv-ps5.elf",
-  "./payloads/web-file-mgr-v1.1.elf",
   "./payloads/websrv-ps5.elf",
   "./slopkit/cat.jpg",
   "./slopkit/core.js",
@@ -77,7 +68,7 @@ var APP_FILES = [
   "./ui/payload-web-failed.png",
   "./ui/payload-web-sending.png",
   "./ui/payload-web-sent.png",
-  "./slopkit/poops.html?go=1&auto=1&production=1&trigger=netcontrol&attempts=8&only=ps0_preflight,ps1_prepare,ps3_stage0,ps4_validate,ps5_stage1,ps6_stage2,ps8_stage3,ps9_stage4,ps10_stage5&log=debug&payload=1&v=42"
+  "./slopkit/poops.html?go=1&auto=1&production=1&trigger=netcontrol&attempts=8&only=ps0_preflight,ps1_prepare,ps3_stage0,ps4_validate,ps5_stage1,ps6_stage2,ps8_stage3,ps9_stage4,ps10_stage5&log=debug&payload=1&v=43"
 ];
 
 self.addEventListener('install', function (event) {
@@ -109,9 +100,7 @@ self.addEventListener('fetch', function (event) {
         return fetch(event.request).then(function (response) {
           if (response && response.status === 200 && response.type !== 'opaque') {
             var copy = response.clone();
-            caches.open(CACHE_NAME).then(function (cache) {
-              cache.put(event.request, copy);
-            });
+            caches.open(CACHE_NAME).then(function (cache) { cache.put(event.request, copy); });
           }
           return response;
         });

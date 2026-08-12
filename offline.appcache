@@ -1,6 +1,6 @@
 CACHE MANIFEST
-# GameYard complete offline v6
-# Includes 73 local SlopKit and payload files
+# GameYard clean offline v7
+# Recent optional payloads removed
 
 CACHE:
 ./
@@ -22,23 +22,14 @@ CACHE:
 ./offsets/9.20.js
 ./offsets/9.40.js
 ./offsets/9.60.js
-./payloads/5%3DLapy-JB-Daemon_v1.2.elf
-./payloads/Lapy-JB-Daemon.elf
-./payloads/Lapy-JB-Daemon_v1.2.elf.elf
-./payloads/PIZZA-HEN-v0.1.elf
 ./payloads/PLK.elf
-./payloads/ShadowMountPlus%201.7alpha5.elf
-./payloads/ShadowMountPlus_1.7alpha5.elf
 ./payloads/elfldr-ps5-1360.elf
 ./payloads/ftpsrv-ps5.elf
 ./payloads/gdbsrv-ps5.elf
 ./payloads/kexp_2026_05_25.bin
 ./payloads/klogsrv-ps5.elf
 ./payloads/kstuff.elf
-./payloads/np-fake-signin-ps5.elf
-./payloads/ps5-backpork.elf
 ./payloads/shsrv-ps5.elf
-./payloads/web-file-mgr-v1.1.elf
 ./payloads/websrv-ps5.elf
 ./slopkit/cat.jpg
 ./slopkit/core.js
@@ -80,7 +71,7 @@ CACHE:
 ./ui/payload-web-failed.png
 ./ui/payload-web-sending.png
 ./ui/payload-web-sent.png
-./slopkit/poops.html?go=1&auto=1&production=1&trigger=netcontrol&attempts=8&only=ps0_preflight,ps1_prepare,ps3_stage0,ps4_validate,ps5_stage1,ps6_stage2,ps8_stage3,ps9_stage4,ps10_stage5&log=debug&payload=1&v=42
+./slopkit/poops.html?go=1&auto=1&production=1&trigger=netcontrol&attempts=8&only=ps0_preflight,ps1_prepare,ps3_stage0,ps4_validate,ps5_stage1,ps6_stage2,ps8_stage3,ps9_stage4,ps10_stage5&log=debug&payload=1&v=43
 
 NETWORK:
 *
