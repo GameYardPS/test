@@ -65,42 +65,70 @@
     (function(){
       var status=document.getElementById('cache-status');
       var label=status?status.getElementsByTagName('span')[0]:null;
-      function setStatus(text){if(label){label.textContent=text;}}
       var runButton=document.querySelector('.run');
       var localRun='./slopkit/poops.html?go=1&auto=1&trigger=netcontrol&payload=1&v=17';
-      function ready(){setStatus(navigator.onLine===false?'OFFLINE MODE • RUN READY':'FULL OFFLINE READY');}
+      var expectedCache='gameyard-w90008-complete-v10';
+      var expectedEntries=110;
+      function setStatus(text){if(label){label.textContent=text;}}
+      function markReady(){
+        document.documentElement.setAttribute('data-offline-ready','yes');
+        if(runButton){runButton.setAttribute('href',localRun);}
+        setStatus(navigator.onLine===false?'OFFLINE MODE • RUN READY':'FULL OFFLINE READY • RUN INCLUDED');
+      }
+      function verifyServiceCache(){
+        if(!('caches' in window)){return Promise.resolve(false);}
+        return window.caches.open(expectedCache).then(function(cache){
+          return Promise.all([cache.keys(),cache.match(localRun)]).then(function(values){
+            return values[0].length>=expectedEntries&&!!values[1];
+          });
+        }).catch(function(){return false;});
+      }
+      function waitForServiceCache(){
+        return new Promise(function(resolve,reject){
+          var started=Date.now();
+          function check(){
+            verifyServiceCache().then(function(ok){
+              if(ok){resolve();}
+              else if(Date.now()-started>240000){reject(new Error('cache timeout'));}
+              else{setStatus('DOWNLOADING OFFLINE FILES...');setTimeout(check,1000);}
+            });
+          }
+          check();
+        });
+      }
       function updateNetworkStatus(){
-        if(navigator.onLine===false){setStatus('OFFLINE MODE');}
-        else if(document.documentElement.getAttribute('data-offline-ready')==='yes'){setStatus('FULL OFFLINE READY');}
+        if(document.documentElement.getAttribute('data-offline-ready')==='yes'){
+          setStatus(navigator.onLine===false?'OFFLINE MODE • RUN READY':'FULL OFFLINE READY • RUN INCLUDED');
+        }else if(navigator.onLine===false){
+          setStatus('OFFLINE CACHE NOT READY');
+        }
       }
       window.addEventListener('online',updateNetworkStatus);
       window.addEventListener('offline',updateNetworkStatus);
       if('serviceWorker' in navigator){
         window.addEventListener('load',function(){
-          navigator.serviceWorker.register('./sw.js',{scope:'./'}).then(function(){
-            return navigator.serviceWorker.ready;
-          }).then(function(){
-            document.documentElement.setAttribute('data-offline-ready','yes');
-            if(runButton){runButton.setAttribute('href',localRun);}
-            ready();
-          }).catch(function(){setStatus('BROWSER CACHE ACTIVE');});
+          setStatus('DOWNLOADING OFFLINE FILES...');
+          navigator.serviceWorker.register('./sw.js',{scope:'./'}).then(function(registration){
+            try{registration.update();}catch(e){}
+            return waitForServiceCache();
+          }).then(markReady).catch(function(){setStatus('OFFLINE CACHE FAILED • KEEP INTERNET ON');});
         });
       }else if(window.applicationCache){
-        window.applicationCache.addEventListener('cached',function(){
-          document.documentElement.setAttribute('data-offline-ready','yes');
-          ready();
+        var appCache=window.applicationCache;
+        appCache.addEventListener('checking',function(){setStatus('CHECKING OFFLINE CACHE...');});
+        appCache.addEventListener('downloading',function(){setStatus('DOWNLOADING OFFLINE FILES...');});
+        appCache.addEventListener('progress',function(event){
+          if(event&&event.total){setStatus('DOWNLOADING OFFLINE FILES '+event.loaded+'/'+event.total);}
         });
-        window.applicationCache.addEventListener('updateready',function(){
-          document.documentElement.setAttribute('data-offline-ready','yes');
-          ready();
+        appCache.addEventListener('cached',markReady);
+        appCache.addEventListener('noupdate',markReady);
+        appCache.addEventListener('updateready',function(){
+          try{appCache.swapCache();}catch(e){}
+          markReady();
         });
-        window.applicationCache.addEventListener('noupdate',function(){
-          document.documentElement.setAttribute('data-offline-ready','yes');
-          ready();
-        });
-        window.applicationCache.addEventListener('error',function(){setStatus('BROWSER CACHE ACTIVE');});
+        appCache.addEventListener('error',function(){setStatus('OFFLINE CACHE FAILED • KEEP INTERNET ON');});
       }else{
-        setStatus('BROWSER CACHE ACTIVE');
+        setStatus('OFFLINE CACHE NOT SUPPORTED');
       }
     }());
   </script>
