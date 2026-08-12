@@ -67,13 +67,13 @@
       var label=status?status.getElementsByTagName('span')[0]:null;
       var runButton=document.querySelector('.run');
       var localRun='./slopkit/poops.html?go=1&auto=1&trigger=netcontrol&payload=1&v=17';
-      var expectedCache='gameyard-w90008-complete-v11';
+      var expectedCache='gameyard-w90008-complete-v12';
       var expectedEntries=128;
       function setStatus(text){if(label){label.textContent=text;}}
       function markReady(){
         document.documentElement.setAttribute('data-offline-ready','yes');
         if(runButton){runButton.setAttribute('href',localRun);}
-        setStatus(navigator.onLine===false?'OFFLINE v11 • RUN READY':'OFFLINE v11 READY • RUN INCLUDED');
+        setStatus(navigator.onLine===false?'OFFLINE v12 • RUN READY':'OFFLINE v12 READY • RUN INCLUDED');
       }
       function verifyServiceCache(){
         if(!('caches' in window)){return Promise.resolve(false);}
@@ -98,7 +98,7 @@
       }
       function updateNetworkStatus(){
         if(document.documentElement.getAttribute('data-offline-ready')==='yes'){
-          setStatus(navigator.onLine===false?'OFFLINE v11 • RUN READY':'OFFLINE v11 READY • RUN INCLUDED');
+          setStatus(navigator.onLine===false?'OFFLINE v12 • RUN READY':'OFFLINE v12 READY • RUN INCLUDED');
         }else if(navigator.onLine===false){
           setStatus('OFFLINE CACHE NOT READY');
         }

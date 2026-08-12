@@ -1,4 +1,4 @@
-var CACHE_NAME = 'gameyard-w90008-complete-v11';
+var CACHE_NAME = 'gameyard-w90008-complete-v12';
 var APP_FILES = [
   "./",
   "./index.html",

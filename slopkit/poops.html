@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" manifest="../offline.appcache">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -620,8 +620,7 @@ async function sendPayloadToElfldr(name) {
     if (!payloadIsListed(name))
         throw new Error("payload is not listed in this menu");
 
-    const response = await fetch("../payloads/" + encodeURIComponent(name),
-        { cache: "no-store" });
+    const response = await fetch("../payloads/" + encodeURIComponent(name));
     if (!response.ok)
         throw new Error("payload fetch failed: HTTP " + response.status);
     const bytes = new Uint8Array(await response.arrayBuffer());
@@ -1078,7 +1077,7 @@ async function preflight() {
 
     let verdict = "ok";
     try {
-        const r = await fetch("rop_slave.js", { cache: "no-store" });
+        const r = await fetch("rop_slave.js");
         if (!r.ok) verdict = "http-" + r.status;
     } catch (err) { verdict = "fetch-threw"; }
     if (verdict === "ok") {
