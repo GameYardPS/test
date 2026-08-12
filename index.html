@@ -65,10 +65,12 @@
       var status=document.getElementById('cache-status');
       var label=status?status.getElementsByTagName('span')[0]:null;
       function setStatus(text){if(label){label.textContent=text;}}
-      function ready(){setStatus(navigator.onLine===false?'OFFLINE MODE':'OFFLINE READY');}
+      var runButton=document.querySelector('.run');
+      var localRun='./slopkit/poops.html?go=1&auto=1&trigger=netcontrol&payload=1&v=17';
+      function ready(){setStatus(navigator.onLine===false?'OFFLINE MODE • RUN READY':'FULL OFFLINE READY');}
       function updateNetworkStatus(){
         if(navigator.onLine===false){setStatus('OFFLINE MODE');}
-        else if(document.documentElement.getAttribute('data-offline-ready')==='yes'){setStatus('OFFLINE READY');}
+        else if(document.documentElement.getAttribute('data-offline-ready')==='yes'){setStatus('FULL OFFLINE READY');}
       }
       window.addEventListener('online',updateNetworkStatus);
       window.addEventListener('offline',updateNetworkStatus);
@@ -78,6 +80,7 @@
             return navigator.serviceWorker.ready;
           }).then(function(){
             document.documentElement.setAttribute('data-offline-ready','yes');
+            if(runButton){runButton.setAttribute('href',localRun);}
             ready();
           }).catch(function(){setStatus('BROWSER CACHE ACTIVE');});
         });
