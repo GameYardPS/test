@@ -1,4 +1,4 @@
-var CACHE_NAME = 'gameyard-w90008-complete-v10';
+var CACHE_NAME = 'gameyard-w90008-complete-v11';
 var APP_FILES = [
   "./",
   "./index.html",
@@ -109,7 +109,25 @@ var APP_FILES = [
   "./ui/payload-wfilemgr-failed.png",
   "./ui/payload-wfilemgr-sending.png",
   "./ui/payload-wfilemgr-sent.png",
-  "./slopkit/poops.html?go=1&auto=1&trigger=netcontrol&payload=1&v=17"
+  "./slopkit/poops.html?go=1&auto=1&trigger=netcontrol&payload=1&v=17",
+  "./slopkit/main.js?v=16",
+  "./slopkit/core.js?v=10",
+  "./slopkit/mem.js?v=10",
+  "./slopkit/poops.js?v=16",
+  "./offsets/10.00.js?v=16",
+  "./offsets/10.01.js?v=16",
+  "./offsets/10.20.js?v=16",
+  "./offsets/10.40.js?v=16",
+  "./offsets/10.60.js?v=16",
+  "./offsets/11.00.js?v=16",
+  "./offsets/11.20.js?v=16",
+  "./offsets/11.40.js?v=16",
+  "./offsets/11.60.js?v=16",
+  "./offsets/12.00.js?v=16",
+  "./offsets/9.00.js?v=16",
+  "./offsets/9.20.js?v=16",
+  "./offsets/9.40.js?v=16",
+  "./offsets/9.60.js?v=16"
 ];
 
 self.addEventListener('install', function (event) {
