@@ -181,6 +181,16 @@
   #payloadMenu .payloadTile img { display:block; width:330px; height:72px;
     max-width:100%; margin:0 auto; }
   #payloadMenu .payloadTile.busy { opacity:.42; }
+  #payloadMenu .payloadTile.textTile {
+    min-height:58px; padding:10px 12px; box-sizing:border-box;
+    display:flex; align-items:center; justify-content:center;
+    border:2px solid #55ff79; border-radius:10px;
+    color:#fff; background:#102017; font:700 14px/1.25 Arial,sans-serif;
+    text-align:center; overflow-wrap:anywhere;
+  }
+  #payloadMenu .payloadTile.textTile[data-state="sending"] { border-color:#ffd84d; color:#ffd84d; }
+  #payloadMenu .payloadTile.textTile[data-state="sent"] { border-color:#55ff79; color:#55ff79; }
+  #payloadMenu .payloadTile.textTile[data-state="failed"] { border-color:#ff5757; color:#ff5757; }
 
   #wrap { display:none !important; }
 </style>
@@ -209,6 +219,15 @@
     <a class="payloadTile" href="#" data-name="websrv-ps5.elf" data-key="web"><img data-src="../ui/payload-web-default.png" alt=""></a>
     <a class="payloadTile" href="#" data-name="kstuff.elf" data-key="kstuff"><img data-src="../ui/payload-kstuff-default.png" alt="KStuff"></a>
     <a class="payloadTile" href="#" data-name="PLK.elf" data-key="plk"><img data-src="../ui/payload-plk-default.png" alt="PLK PLD Manager"></a>
+    <a class="payloadTile textTile" href="#" data-name="5=Lapy-JB-Daemon_v1.2.elf">5=Lapy-JB-Daemon_v1.2.elf</a>
+    <a class="payloadTile textTile" href="#" data-name="Lapy-JB-Daemon.elf">Lapy-JB-Daemon.elf</a>
+    <a class="payloadTile textTile" href="#" data-name="Lapy-JB-Daemon_v1.2.elf.elf">Lapy-JB-Daemon_v1.2.elf.elf</a>
+    <a class="payloadTile textTile" href="#" data-name="PIZZA-HEN-v0.1.elf">PIZZA-HEN-v0.1.elf</a>
+    <a class="payloadTile textTile" href="#" data-name="ShadowMountPlus 1.7alpha5.elf">ShadowMountPlus 1.7alpha5.elf</a>
+    <a class="payloadTile textTile" href="#" data-name="ShadowMountPlus_1.7alpha5.elf">ShadowMountPlus_1.7alpha5.elf</a>
+    <a class="payloadTile textTile" href="#" data-name="np-fake-signin-ps5.elf">np-fake-signin-ps5.elf</a>
+    <a class="payloadTile textTile" href="#" data-name="ps5-backpork.elf">ps5-backpork.elf</a>
+    <a class="payloadTile textTile" href="#" data-name="web-file-mgr-v1.1.elf">web-file-mgr-v1.1.elf</a>
   </div>
 </div>
 <div id="nav"></div>
@@ -765,7 +784,7 @@ const rowByKey = new Map();
 let payloadSendBusy = false;
 const PAYLOAD_PORT = 9021;
 const PAYLOAD_BUFFER_SIZE = 0x10000;
-const PAYLOAD_MAX_SIZE = 0x400000;
+const PAYLOAD_MAX_SIZE = 0x800000;
 let payloadSendStore = null;
 let payloadSockaddrStore = null;
 let payloadSocketOptionStore = null;
@@ -797,7 +816,7 @@ function setPayloadTileState(tile, state) {
 }
 
 function payloadIsListed(name) {
-    if (!/^[A-Za-z0-9._-]+\.elf$/.test(name)) return false;
+    if (!/^[A-Za-z0-9 ._=-]+\.elf$/.test(name)) return false;
     const tiles = payloadMenuEl.getElementsByTagName("a");
     for (let i = 0; i < tiles.length; ++i)
         if (tiles[i].getAttribute("data-name") === name) return true;
@@ -860,7 +879,7 @@ async function sendPayloadToElfldr(name) {
     if (!bytes.length)
         throw new Error("payload is empty");
     if (bytes.length > PAYLOAD_MAX_SIZE)
-        throw new Error("payload is larger than the 2 MiB limit");
+        throw new Error("payload is larger than the 8 MiB limit");
     if (bytes.length < 4 || bytes[0] !== 0x7f || bytes[1] !== 0x45
         || bytes[2] !== 0x4c || bytes[3] !== 0x46)
         throw new Error("payload does not start with the ELF signature");
