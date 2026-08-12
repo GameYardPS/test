@@ -15,7 +15,8 @@
     header,main,footer{position:relative;z-index:1}
     header{direction:ltr;display:flex;align-items:center;justify-content:space-between;padding:24px clamp(20px,4vw,56px)}
     .brand{display:flex;align-items:center;gap:12px;color:#fff;text-decoration:none}
-    .mark{display:grid;place-items:center;width:44px;height:44px;border-radius:14px;background:linear-gradient(145deg,#7ee24b,#38a916);color:#10220c;font-size:24px;font-weight:900;box-shadow:0 10px 28px rgba(52,181,17,.28)}
+    .mark{display:block;width:44px;height:44px;overflow:hidden;border:2px solid rgba(126,226,75,.85);border-radius:50%;background:#152118;box-shadow:0 10px 28px rgba(52,181,17,.28)}
+    .mark img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 28%}
     .brand-copy{display:flex;flex-direction:column;line-height:1.05}
     .brand-copy strong{font-size:18px;letter-spacing:.2px}
     .brand-copy small{margin-top:5px;color:rgba(255,255,255,.68);font-size:10px;letter-spacing:2px;text-transform:uppercase}
@@ -43,7 +44,7 @@
   <div class="shell">
     <header>
       <a class="brand" href="./" aria-label="GameYard home">
-        <span class="mark">G</span>
+        <span class="mark"><img src="./gameyard-logo.jpeg" alt="شعار GameYard"></span>
         <span class="brand-copy"><strong>GameYard</strong><small>Gaming Center</small></span>
       </a>
       <span class="chip">PS5&nbsp; • &nbsp;12.00</span>

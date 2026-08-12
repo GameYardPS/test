@@ -1,9 +1,10 @@
-var CACHE_NAME='gameyard-ps5-offline-v3';
+var CACHE_NAME='gameyard-ps5-offline-v4';
 var APP_FILES=[
   './',
   './index.html',
   './offline.appcache',
   './sw.js',
+  './gameyard-logo.jpeg',
   './offsets/10.00.js',
   './offsets/10.01.js',
   './offsets/10.20.js',
@@ -110,4 +111,3 @@ self.addEventListener('fetch',function(event){
     })
   );
 });
-
