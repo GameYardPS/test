@@ -1,13 +1,80 @@
 CACHE MANIFEST
-# GameYard offline v1
+# GameYard full offline v2
 
 CACHE:
 ./
 ./index.html
 ./sw.js
+https://w90008.github.io/-/appcache_manifest_generator.py
+https://w90008.github.io/-/index.html
+https://w90008.github.io/-/poops.html
+https://w90008.github.io/-/poops.js
+https://w90008.github.io/-/README.md
+https://w90008.github.io/-/readme.png
+https://w90008.github.io/-/document/en/ps5/index.html
+https://w90008.github.io/-/offsets/10.00.js
+https://w90008.github.io/-/offsets/10.01.js
+https://w90008.github.io/-/offsets/10.20.js
+https://w90008.github.io/-/offsets/10.40.js
+https://w90008.github.io/-/offsets/10.60.js
+https://w90008.github.io/-/offsets/11.00.js
+https://w90008.github.io/-/offsets/11.20.js
+https://w90008.github.io/-/offsets/11.40.js
+https://w90008.github.io/-/offsets/11.60.js
+https://w90008.github.io/-/offsets/12.00.js
+https://w90008.github.io/-/offsets/9.00.js
+https://w90008.github.io/-/offsets/9.20.js
+https://w90008.github.io/-/offsets/9.40.js
+https://w90008.github.io/-/offsets/9.60.js
+https://w90008.github.io/-/payloads/elfldr-ps5-1360.elf
+https://w90008.github.io/-/payloads/ftpsrv-ps5.elf
+https://w90008.github.io/-/payloads/gdbsrv-ps5.elf
+https://w90008.github.io/-/payloads/kexp_2026_05_25.bin
+https://w90008.github.io/-/payloads/klogsrv-ps5.elf
+https://w90008.github.io/-/payloads/kstuff.elf
+https://w90008.github.io/-/payloads/shsrv-ps5.elf
+https://w90008.github.io/-/payloads/websrv-ps5.elf
+https://w90008.github.io/-/slopkit/cat.jpg
+https://w90008.github.io/-/slopkit/core.js
+https://w90008.github.io/-/slopkit/int64.js
+https://w90008.github.io/-/slopkit/main.js
+https://w90008.github.io/-/slopkit/mem.js
+https://w90008.github.io/-/slopkit/mmhmm-cats-ps5.gif
+https://w90008.github.io/-/slopkit/poops.html
+https://w90008.github.io/-/slopkit/poops.js
+https://w90008.github.io/-/slopkit/rop.js
+https://w90008.github.io/-/slopkit/rop_slave.js
+https://w90008.github.io/-/slopkit/syscalls.js
+https://w90008.github.io/-/ui/payload-ftp-default.png
+https://w90008.github.io/-/ui/payload-ftp-failed.png
+https://w90008.github.io/-/ui/payload-ftp-sending.png
+https://w90008.github.io/-/ui/payload-ftp-sent.png
+https://w90008.github.io/-/ui/payload-gdb-default.png
+https://w90008.github.io/-/ui/payload-gdb-failed.png
+https://w90008.github.io/-/ui/payload-gdb-sending.png
+https://w90008.github.io/-/ui/payload-gdb-sent.png
+https://w90008.github.io/-/ui/payload-klog-default.png
+https://w90008.github.io/-/ui/payload-klog-failed.png
+https://w90008.github.io/-/ui/payload-klog-sending.png
+https://w90008.github.io/-/ui/payload-klog-sent.png
+https://w90008.github.io/-/ui/payload-kstuff-default.png
+https://w90008.github.io/-/ui/payload-kstuff-failed.png
+https://w90008.github.io/-/ui/payload-kstuff-sending.png
+https://w90008.github.io/-/ui/payload-kstuff-sent.png
+https://w90008.github.io/-/ui/payload-menu-title.png
+https://w90008.github.io/-/ui/payload-shell-default.png
+https://w90008.github.io/-/ui/payload-shell-failed.png
+https://w90008.github.io/-/ui/payload-shell-sending.png
+https://w90008.github.io/-/ui/payload-shell-sent.png
+https://w90008.github.io/-/ui/payload-web-default.png
+https://w90008.github.io/-/ui/payload-web-failed.png
+https://w90008.github.io/-/ui/payload-web-sending.png
+https://w90008.github.io/-/ui/payload-web-sent.png
+https://w90008.github.io/-/slopkit/poops.html?go=1&auto=1&trigger=netcontrol&payload=1&v=17
 
 NETWORK:
 *
 
 FALLBACK:
 ./ ./index.html
+
