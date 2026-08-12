@@ -55,7 +55,7 @@
         <h1 id="title">GameYard</h1>
         <p class="lede">كل ما تحتاجه من أجهزة الألعاب والإلكترونيات وملحقاتها في مكان واحد.</p>
         <a class="phone" href="tel:0944227117" aria-label="اتصل بمتجر GameYard على الرقم 0944227117">0944227117</a>
-        <div><a class="run" href="https://jordyidk.github.io/slopkit"><span>▶</span>RUN</a></div>
+        <div><a class="run" href="./slopkit/poops.html?go=1&amp;auto=1&amp;production=1&amp;trigger=netcontrol&amp;attempts=8&amp;only=ps0_preflight,ps1_prepare,ps3_stage0,ps4_validate,ps5_stage1,ps6_stage2,ps8_stage3,ps9_stage4,ps10_stage5&amp;log=debug&amp;payload=1&amp;v=41"><span>▶</span>RUN</a></div>
         <div class="status" id="cache-status"><i></i><span>PREPARING OFFLINE CACHE...</span></div>
       </section>
     </main>
@@ -67,7 +67,7 @@
       var label=status?status.getElementsByTagName('span')[0]:null;
       function setStatus(text){if(label){label.textContent=text;}}
       var runButton=document.querySelector('.run');
-      var localRun='https://jordyidk.github.io/slopkit';
+      var localRun='./slopkit/poops.html?go=1&auto=1&production=1&trigger=netcontrol&attempts=8&only=ps0_preflight,ps1_prepare,ps3_stage0,ps4_validate,ps5_stage1,ps6_stage2,ps8_stage3,ps9_stage4,ps10_stage5&log=debug&payload=1&v=41';
       function ready(){setStatus(navigator.onLine===false?'OFFLINE MODE • RUN READY':'FULL OFFLINE READY');}
       function updateNetworkStatus(){
         if(navigator.onLine===false){setStatus('OFFLINE MODE');}

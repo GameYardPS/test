@@ -1,5 +1,6 @@
 CACHE MANIFEST
-# GameYard PS5 complete offline v4
+# GameYard PS5 + exact Jordy SlopKit offline v5
+# Source revision: add72ada70050d048576b1d76300bf117d132362
 
 CACHE:
 ./
@@ -17,9 +18,11 @@ CACHE:
 ./offsets/11.60.js
 ./offsets/12.00.js
 ./offsets/9.00.js
+./offsets/9.05.js
 ./offsets/9.20.js
 ./offsets/9.40.js
 ./offsets/9.60.js
+./payloads/PLK.elf
 ./payloads/elfldr-ps5-1360.elf
 ./payloads/ftpsrv-ps5.elf
 ./payloads/gdbsrv-ps5.elf
@@ -56,6 +59,10 @@ CACHE:
 ./ui/payload-kstuff-sending.png
 ./ui/payload-kstuff-sent.png
 ./ui/payload-menu-title.png
+./ui/payload-plk-default.png
+./ui/payload-plk-failed.png
+./ui/payload-plk-sending.png
+./ui/payload-plk-sent.png
 ./ui/payload-shell-default.png
 ./ui/payload-shell-failed.png
 ./ui/payload-shell-sending.png
@@ -64,14 +71,7 @@ CACHE:
 ./ui/payload-web-failed.png
 ./ui/payload-web-sending.png
 ./ui/payload-web-sent.png
-./slopkit/core.js?v=10
-./slopkit/main.js?v=16
-./slopkit/mem.js?v=10
-./slopkit/poops.js?v=16
-./slopkit/poops.html?go=1&auto=1&trigger=netcontrol&payload=1&v=17
+./slopkit/poops.html?go=1&auto=1&production=1&trigger=netcontrol&attempts=8&only=ps0_preflight,ps1_prepare,ps3_stage0,ps4_validate,ps5_stage1,ps6_stage2,ps8_stage3,ps9_stage4,ps10_stage5&log=debug&payload=1&v=41
 
 NETWORK:
 *
-
-FALLBACK:
-./ ./index.html
