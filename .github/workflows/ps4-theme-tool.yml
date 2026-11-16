@@ -1,0 +1,38 @@
+name: Build PS4 theme packaging tool
+on:
+  push:
+    paths:
+      - '.github/workflows/ps4-theme-tool.yml'
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout packaging tool
+        run: git clone --depth=1 https://github.com/OpenOrbis/LibOrbisPkg.git tool
+      - name: Patch theme package support
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          root=Path('tool/LibOrbisPkg')
+          p=root/'GP4/Gp4Project.cs'
+          s=p.read_text(encoding='utf-8-sig')
+          s=s.replace('|| proj.volume.Type == VolumeType.pkg_ps4_ac_nodata)', '|| proj.volume.Type == VolumeType.pkg_ps4_theme\n        || proj.volume.Type == VolumeType.pkg_ps4_sf_theme\n        || proj.volume.Type == VolumeType.pkg_ps4_ac_nodata)')
+          p.write_text(s)
+          p=root/'GP4/Gp4Validator.cs'
+          s=p.read_text(encoding='utf-8-sig').replace('case VolumeType.pkg_ps4_ac_data:', 'case VolumeType.pkg_ps4_ac_data:\n        case VolumeType.pkg_ps4_theme:\n        case VolumeType.pkg_ps4_sf_theme:')
+          p.write_text(s)
+          p=root/'PKG/PkgBuilder.cs'
+          s=p.read_text(encoding='utf-8-sig').replace('iro_tag = IROTag.None,', 'iro_tag = volType == GP4.VolumeType.pkg_ps4_theme ? IROTag.SS_THEME\n          : volType == GP4.VolumeType.pkg_ps4_sf_theme ? IROTag.SF_THEME\n          : IROTag.None,')
+          s=s.replace('sfo["PUBTOOLINFO"] = new SFO.Utf8Value("PUBTOOLINFO", date+time+sizeInfo, 0x200);', 'var originalInfo = sfo["PUBTOOLINFO"]?.ToString() ?? "";\n        var loudnessInfo = originalInfo.Split(\',\').FirstOrDefault(v => v.StartsWith("bgmhome_loud="));\n        sfo["PUBTOOLINFO"] = new SFO.Utf8Value("PUBTOOLINFO", date+time+sizeInfo + (loudnessInfo == null ? "" : "," + loudnessInfo), 0x200);')
+          p.write_text(s)
+          PY
+      - name: Publish self-contained builder
+        run: dotnet publish tool/PkgTool.Core/PkgTool.Core.csproj --configuration Release --runtime linux-x64 --self-contained true -p:PublishSingleFile=true -p:PublishTrimmed=false --output pkgtool-linux
+      - uses: actions/upload-artifact@v4
+        with:
+          name: PkgTool-PS4Theme-Linux
+          path: pkgtool-linux/
+          retention-days: 3
