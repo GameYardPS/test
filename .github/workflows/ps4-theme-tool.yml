@@ -22,7 +22,7 @@ jobs:
           s=s.replace('|| proj.volume.Type == VolumeType.pkg_ps4_ac_nodata)', '|| proj.volume.Type == VolumeType.pkg_ps4_theme\n        || proj.volume.Type == VolumeType.pkg_ps4_sf_theme\n        || proj.volume.Type == VolumeType.pkg_ps4_ac_nodata)')
           p.write_text(s)
           p=root/'GP4/Gp4Validator.cs'
-          s=p.read_text(encoding='utf-8-sig').replace('case VolumeType.pkg_ps4_ac_data:', 'case VolumeType.pkg_ps4_ac_data:\n        case VolumeType.pkg_ps4_theme:\n        case VolumeType.pkg_ps4_sf_theme:')
+          s=p.read_text(encoding='utf-8-sig').replace('case VolumeType.pkg_ps4_ac_data:', 'case VolumeType.pkg_ps4_ac_data:\n        case VolumeType.pkg_ps4_theme:\n        case VolumeType.pkg_ps4_sf_theme:', 1)
           p.write_text(s)
           p=root/'PKG/PkgBuilder.cs'
           s=p.read_text(encoding='utf-8-sig').replace('iro_tag = IROTag.None,', 'iro_tag = volType == GP4.VolumeType.pkg_ps4_theme ? IROTag.SS_THEME\n          : volType == GP4.VolumeType.pkg_ps4_sf_theme ? IROTag.SF_THEME\n          : IROTag.None,')
